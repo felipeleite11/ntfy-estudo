@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type SubmitEvent } from 'react'
 import './App.css'
+import axios from 'axios'
 
 const defaultNtfyUrl = 'https://outros-ntfy.y0nyoi.easypanel.host'
 const defaultTopic = 'test'
@@ -18,6 +19,7 @@ function App() {
 	const [ntfyServerUrl, setNtfyServerUrl] = useState(defaultNtfyUrl)
 	const [ntfyTopic, setNtfyTopic] = useState(defaultTopic)
 	const [notifications, setNotifications] = useState<NtfyContent[]>([])
+	const [isCreatingNotification, setIsCreatingNotification] = useState(false)
 
 	async function notify(content: NtfyContent) {
 		if (!("Notification" in window)) {
@@ -75,11 +77,35 @@ function App() {
 		}
 	}, [])
 
+	async function handleCreateNotification(event: SubmitEvent<HTMLFormElement>) {
+		event.preventDefault()
+
+		setIsCreatingNotification(true)
+
+		const ntfyUrl = `${ntfyServerUrl}/${ntfyTopic}`
+		
+		const formData = new FormData(event.currentTarget)
+		
+		const data = Object.fromEntries(formData.entries())
+		
+		try {
+			await axios.post(ntfyUrl, data)
+
+			console.log("Notificação criada:", data)
+			
+			event.currentTarget.reset()
+		} catch (error) {
+			console.error("Erro ao criar a notificação:", error)
+		} finally {
+			setIsCreatingNotification(false)
+		}
+	}
+
 	return (
 		<section className="p-12">
 			<h1>Ntfy estudo</h1>
 
-			<div className='flex flex-col gap-4'>
+			<div className='flex flex-col gap-4 mt-12'>
 				<div className="flex flex-col items-start">
 					<label htmlFor="server" className='text-xs'>Server URL</label>
 					<input type="text" id="server" value={ntfyServerUrl} onChange={e => { setNtfyServerUrl(e.target.value) }} className="border border-gray-500 rounded-md w-full py-1 px-2" />
@@ -91,8 +117,28 @@ function App() {
 				</div>
 			</div>
 
+			<div className="flex flex-col gap-3 mt-8 items-start">
+				<span className="text-lg font-bold">Create notification</span>
+
+				<form onSubmit={handleCreateNotification} className='flex flex-col items-start gap-2'>
+					<div className="flex flex-col items-start">
+						<label htmlFor="title-input" className='text-xs'>Title</label>
+						<input type="text" id="title-input" name="title" className="border border-gray-500 rounded-md w-full py-1 px-2" />
+					</div>
+
+					<div className="flex flex-col items-start">
+						<label htmlFor="content-input" className='text-xs'>Content</label>
+						<input type="text" id="content-input" name="content" className="border border-gray-500 rounded-md w-full py-1 px-2" />
+					</div>
+
+					<button type="submit" disabled={isCreatingNotification} className="border p-1 px-2 rounded-md cursor-pointer">
+						{isCreatingNotification ? 'Creating...' : 'Create notification'}
+					</button>
+				</form>
+			</div>
+
 			<div className="flex flex-col mt-8 gap-3 items-start">
-				<span className="text-lg font-bold">Notificações</span>
+				<span className="text-lg font-bold">Notifications</span>
 
 				<ul>
 					{notifications.map((notification, idx) => (
