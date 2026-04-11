@@ -49,13 +49,6 @@ function App() {
 			}
 
 			registration.showNotification(content.title, options)
-
-			// const n = new Notification(content.title, options)
-
-			// n.onclick = () => {
-			// 	window.focus() // Traz a aba do site para frente
-			// 	console.log("Usuário clicou na notificação")
-			// }
 		}
 	}
 
