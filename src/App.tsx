@@ -1,13 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const topic = 'teste'
 const ntfyUrl = `https://outros-ntfy.y0nyoi.easypanel.host/${topic}/sse`
-
-// const publishURL = `https://ntfy.sh/example`;
-// const subscribeURL = `https://ntfy.sh/example/sse`;
-// const events = document.getElementById('events');
-// const eventSource = new EventSource(subscribeURL);
 
 interface NtfyMessage {
 	event: string
@@ -16,6 +11,8 @@ interface NtfyMessage {
 }
 
 function App() {
+	const [notifications, setNotifications] = useState<NtfyMessage[]>([])
+
 	useEffect(() => {
 		const eventSource = new EventSource(ntfyUrl)
 
@@ -24,32 +21,27 @@ function App() {
 
 			if (data.event === 'message') {
 				console.log('Nova notificação recebida:', data.message)
+
+				setNotifications(old => [...old, data])
 			}
 		}
 
 		eventSource.onerror = (error) => {
 			console.error('Erro na conexão com ntfy:', error)
 		}
-
-		// eventSource.onerror = (e) => {
-		// 	let event = document.createElement('div');
-		// 	event.innerHTML = `EventSource error: Failed to connect to ${subscribeURL}`;
-		// 	events.appendChild(event);
-		// };
-		// eventSource.onmessage = (e) => {
-		// 	let event = document.createElement('div');
-		// 	event.innerHTML = e.data;
-		// 	events.appendChild(event);
-		// };
 	}, [])
 
 	return (
 		<section>
-			<div>
-				<h1>Get started</h1>
-			</div>
+			<h1>Ntfy estudo</h1>
 
-
+			<ul>
+				{notifications.map((notification, idx) => (
+					<li key={idx}>
+						{notification.title}
+					</li>
+				))}
+			</ul>
 		</section>
 	)
 }
