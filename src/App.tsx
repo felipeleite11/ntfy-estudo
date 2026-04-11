@@ -19,7 +19,7 @@ function App() {
 
 	async function notify(content: NtfyContent) {
 		if (!("Notification" in window)) {
-			console.error("Este navegador não suporta notificações de desktop.")
+			console.error("Este navegador não suporta notificações desktop.")
 			return
 		}
 
@@ -31,9 +31,9 @@ function App() {
 		if (Notification.permission === "granted") {
 			const options = {
 				body: content.content,
-				icon: "favicon.svg", // Ícone que aparece na notificação
-				badge: "favicon.svg",   // Ícone pequeno para Android
-				tag: "test-notification",               // Agrupa notificações do mesmo tipo
+				icon: "favicon.svg",
+				badge: "favicon.svg",
+				// tag: "test-notification",
 				vibrate: [200, 100, 200]
 			}
 
