@@ -4,14 +4,47 @@ import './App.css'
 const topic = 'teste'
 const ntfyUrl = `https://outros-ntfy.y0nyoi.easypanel.host/${topic}/sse`
 
+interface NtfyContent {
+	title: string
+	content: string
+}
+
 interface NtfyMessage {
 	event: string
-	title: string
 	message: string
 }
 
 function App() {
-	const [notifications, setNotifications] = useState<NtfyMessage[]>([])
+	const [notifications, setNotifications] = useState<NtfyContent[]>([])
+
+	async function notify(content: NtfyContent) {
+		if (!("Notification" in window)) {
+			console.error("Este navegador não suporta notificações de desktop.")
+			return
+		}
+
+		if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+			const permission = await Notification.requestPermission()
+			if (permission !== "granted") return
+		}
+
+		if (Notification.permission === "granted") {
+			const options = {
+				body: content.content,
+				icon: "favicon.svg", // Ícone que aparece na notificação
+				badge: "favicon.svg",   // Ícone pequeno para Android
+				tag: "test-notification",               // Agrupa notificações do mesmo tipo
+				vibrate: [200, 100, 200]
+			}
+
+			const n = new Notification(content.title, options)
+
+			n.onclick = () => {
+				window.focus() // Traz a aba do site para frente
+				console.log("Usuário clicou na notificação")
+			}
+		}
+	}
 
 	useEffect(() => {
 		const eventSource = new EventSource(ntfyUrl)
@@ -20,9 +53,13 @@ function App() {
 			const data = JSON.parse(event.data) as NtfyMessage
 
 			if (data.event === 'message') {
-				console.log('Nova notificação recebida:', data.message)
+				const content = JSON.parse(data.message) as NtfyContent
 
-				setNotifications(old => [...old, data])
+				console.log('Nova notificação recebida:', content.title)
+
+				notify(content)
+
+				setNotifications(old => [...old, content])
 			}
 		}
 
