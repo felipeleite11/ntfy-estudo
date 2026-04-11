@@ -38,7 +38,8 @@ function App() {
 				icon: "favicon.svg",
 				badge: "favicon.svg",
 				// tag: "test-notification",
-				// vibrate: [200, 100, 200],
+				// @ts-ignore
+				vibrate: [200, 100, 200],
 				// @ts-ignore
 				image: 'https://ddymbfzlhjerietmuuzg.supabase.co/storage/v1/object/public/ifolhear/felipe-profile.png'
 			}
