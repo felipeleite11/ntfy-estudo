@@ -88,7 +88,19 @@ function App() {
 		<section className="p-12">
 			<h1>Ntfy estudo</h1>
 
-			<div className="flex flex-col mt-16 gap-3 items-start">
+			<div className='flex flex-col gap-4'>
+				<div className="flex flex-col items-start">
+					<label htmlFor="server" className='text-xs'>Server URL</label>
+					<input type="text" id="server" value={ntfyServerUrl} onChange={e => { setNtfyServerUrl(e.target.value) }} className="border border-gray-500 rounded-md w-full py-1 px-2" />
+				</div>
+
+				<div className="flex flex-col items-start">
+					<label htmlFor="topic" className='text-xs'>Topic</label>
+					<input type="text" id="topic" value={ntfyTopic} onChange={e => { setNtfyTopic(e.target.value) }} className="border border-gray-500 rounded-md w-full py-1 px-2" />
+				</div>
+			</div>
+
+			<div className="flex flex-col mt-8 gap-3 items-start">
 				<span className="text-lg font-bold">Notificações</span>
 
 				<ul>
