@@ -93,7 +93,7 @@ function App() {
 
 			console.log("Notificação criada:", data)
 			
-			event.currentTarget.reset()
+			event.target.reset()
 		} catch (error) {
 			console.error("Erro ao criar a notificação:", error)
 		} finally {
