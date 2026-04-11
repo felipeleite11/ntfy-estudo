@@ -33,7 +33,9 @@ function App() {
 		}
 
 		if (Notification.permission === "granted") {
-			const registration = await navigator.serviceWorker.register('/sw.js')
+			await navigator.serviceWorker.register('/sw.js')
+
+			const registration = await navigator.serviceWorker.ready
 
 			const options: NotificationOptions = {
 				body: content.content,
