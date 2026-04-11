@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const defaultNtfyUrl = 'https://outros-ntfy.y0nyoi.easypanel.host' // `https://outros-ntfy.y0nyoi.easypanel.host/${topic}/sse`
-const defaultTopic = 'teste'
+const defaultNtfyUrl = 'https://outros-ntfy.y0nyoi.easypanel.host'
+const defaultTopic = 'test'
 
 interface NtfyContent {
 	title: string
