@@ -17,20 +17,7 @@ interface NtfyMessage {
 function App() {
 	const [ntfyServerUrl, setNtfyServerUrl] = useState(defaultNtfyUrl)
 	const [ntfyTopic, setNtfyTopic] = useState(defaultTopic)
-	const [notifications, setNotifications] = useState<NtfyContent[]>([
-		{
-			content: 'tafad',
-			title: 'Teste'
-		},
-		{
-			content: 'tafad',
-			title: 'Teste 2'
-		},
-		{
-			content: 'tafad',
-			title: 'Teste 3'
-		}
-	])
+	const [notifications, setNotifications] = useState<NtfyContent[]>([])
 
 	async function notify(content: NtfyContent) {
 		if (!("Notification" in window)) {
