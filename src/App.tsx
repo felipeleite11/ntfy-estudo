@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const topic = 'teste'
-const ntfyUrl = `https://outros-ntfy.y0nyoi.easypanel.host/${topic}/sse`
+const defaultNtfyUrl = 'https://outros-ntfy.y0nyoi.easypanel.host' // `https://outros-ntfy.y0nyoi.easypanel.host/${topic}/sse`
+const defaultTopic = 'teste'
 
 interface NtfyContent {
 	title: string
@@ -15,7 +15,22 @@ interface NtfyMessage {
 }
 
 function App() {
-	const [notifications, setNotifications] = useState<NtfyContent[]>([])
+	const [ntfyServerUrl, setNtfyServerUrl] = useState(defaultNtfyUrl)
+	const [ntfyTopic, setNtfyTopic] = useState(defaultTopic)
+	const [notifications, setNotifications] = useState<NtfyContent[]>([
+		{
+			content: 'tafad',
+			title: 'Teste'
+		},
+		{
+			content: 'tafad',
+			title: 'Teste 2'
+		},
+		{
+			content: 'tafad',
+			title: 'Teste 3'
+		}
+	])
 
 	async function notify(content: NtfyContent) {
 		if (!("Notification" in window)) {
@@ -29,12 +44,13 @@ function App() {
 		}
 
 		if (Notification.permission === "granted") {
-			const options = {
+			const options: NotificationOptions = {
 				body: content.content,
 				icon: "favicon.svg",
 				badge: "favicon.svg",
 				// tag: "test-notification",
-				vibrate: [200, 100, 200]
+				vibrate: [200, 100, 200],
+				image: 'https://ddymbfzlhjerietmuuzg.supabase.co/storage/v1/object/public/ifolhear/felipe-profile.png'
 			}
 
 			const n = new Notification(content.title, options)
@@ -47,6 +63,7 @@ function App() {
 	}
 
 	useEffect(() => {
+		const ntfyUrl = `${ntfyServerUrl}/${ntfyTopic}/sse`
 		const eventSource = new EventSource(ntfyUrl)
 
 		eventSource.onmessage = (event: { data: string }) => {
@@ -54,8 +71,6 @@ function App() {
 
 			if (data.event === 'message') {
 				const content = JSON.parse(data.message) as NtfyContent
-
-				console.log('Nova notificação recebida:', content.title)
 
 				notify(content)
 
@@ -69,16 +84,21 @@ function App() {
 	}, [])
 
 	return (
-		<section>
+		<section className="p-12">
 			<h1>Ntfy estudo</h1>
 
-			<ul>
-				{notifications.map((notification, idx) => (
-					<li key={idx}>
-						{notification.title}
-					</li>
-				))}
-			</ul>
+			<div className="flex flex-col mt-16 gap-3 items-start">
+				<span className="text-lg font-bold">Notificações</span>
+
+				<ul>
+					{notifications.map((notification, idx) => (
+						<li key={idx} className="text-left leading-8 text-sm flex gap-4">
+							<span className="text-gray-200 font-semibold">{notification.title}</span>
+							<span className="opacity-70">{notification.content}</span>
+						</li>
+					))}
+				</ul>
+			</div>
 		</section>
 	)
 }
