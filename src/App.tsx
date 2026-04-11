@@ -54,6 +54,10 @@ function App() {
 		const ntfyUrl = `${ntfyServerUrl}/${ntfyTopic}/sse`
 		const eventSource = new EventSource(ntfyUrl)
 
+		eventSource.onopen = () => {
+			console.log(`EventSource connected to ${ntfyServerUrl}/${ntfyTopic}/sse`)
+		}
+
 		eventSource.onmessage = (event: { data: string }) => {
 			const data = JSON.parse(event.data) as NtfyMessage
 
