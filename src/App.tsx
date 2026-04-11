@@ -33,6 +33,8 @@ function App() {
 		}
 
 		if (Notification.permission === "granted") {
+			const registration = await navigator.serviceWorker.register('/sw.js')
+
 			const options: NotificationOptions = {
 				body: content.content,
 				icon: "favicon.svg",
@@ -44,12 +46,14 @@ function App() {
 				image: 'https://ddymbfzlhjerietmuuzg.supabase.co/storage/v1/object/public/ifolhear/felipe-profile.png'
 			}
 
-			const n = new Notification(content.title, options)
+			registration.showNotification(content.title, options)
 
-			n.onclick = () => {
-				window.focus() // Traz a aba do site para frente
-				console.log("Usuário clicou na notificação")
-			}
+			// const n = new Notification(content.title, options)
+
+			// n.onclick = () => {
+			// 	window.focus() // Traz a aba do site para frente
+			// 	console.log("Usuário clicou na notificação")
+			// }
 		}
 	}
 
