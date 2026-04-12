@@ -2,12 +2,13 @@ import { useEffect, useState, type SubmitEvent } from 'react'
 import './App.css'
 import axios from 'axios'
 
-const defaultNtfyUrl = 'https://outros-ntfy.y0nyoi.easypanel.host'
-const defaultTopic = 'test'
+const defaultNtfyUrl = import.meta.env.VITE_NTFY_URL
+const defaultTopic = import.meta.env.VITE_NTFY_TOPIC
 
 interface NtfyContent {
 	title: string
 	content: string
+	image: string
 }
 
 interface NtfyMessage {
@@ -45,7 +46,7 @@ function App() {
 				// @ts-ignore
 				vibrate: [200, 100, 200],
 				// @ts-ignore
-				image: 'https://ddymbfzlhjerietmuuzg.supabase.co/storage/v1/object/public/ifolhear/felipe-profile.png'
+				image: content.image
 			}
 
 			registration.showNotification(content.title, options)
@@ -120,15 +121,26 @@ function App() {
 			<div className="flex flex-col gap-3 mt-8 items-start">
 				<span className="text-lg font-bold">Create notification</span>
 
-				<form onSubmit={handleCreateNotification} className='flex flex-col items-start gap-2'>
+				<form onSubmit={handleCreateNotification} className='flex flex-col gap-2 w-full'>
 					<div className="flex flex-col items-start">
 						<label htmlFor="title-input" className='text-xs'>Title</label>
-						<input type="text" id="title-input" name="title" className="border border-gray-500 rounded-md w-full py-1 px-2" />
+						<input type="text" defaultValue="Título da notificação" id="title-input" name="title" className="border border-gray-500 rounded-md w-full py-1 px-2" />
 					</div>
 
 					<div className="flex flex-col items-start">
 						<label htmlFor="content-input" className='text-xs'>Content</label>
-						<input type="text" id="content-input" name="content" className="border border-gray-500 rounded-md w-full py-1 px-2" />
+						<input type="text" defaultValue="Detalhes da notificação" id="content-input" name="content" className="border border-gray-500 rounded-md w-full py-1 px-2" />
+					</div>
+
+					<div className="flex flex-col items-start">
+						<label htmlFor="image-input" className='text-xs'>Image</label>
+						<input 
+							type="text" 
+							defaultValue="https://ddymbfzlhjerietmuuzg.supabase.co/storage/v1/object/public/ifolhear/felipe-profile.png"
+							id="image-input" 
+							name="image" 
+							className="border border-gray-500 rounded-md w-full py-1 px-2" 
+						/>
 					</div>
 
 					<button type="submit" disabled={isCreatingNotification} className="border p-1 px-2 rounded-md cursor-pointer">
