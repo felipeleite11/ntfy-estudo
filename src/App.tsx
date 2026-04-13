@@ -136,8 +136,8 @@ function App() {
 					</div>
 
 					<div className="flex flex-col items-start">
-						<label htmlFor="content-input" className='text-xs'>Content</label>
-						<input type="text" defaultValue="Detalhes da **notificação**" id="content-input" name="content" className="border border-gray-500 rounded-md w-full py-1 px-2" />
+						<label htmlFor="message-input" className='text-xs'>Content</label>
+						<input type="text" defaultValue="Detalhes da **notificação**" id="message-input" name="message" className="border border-gray-500 rounded-md w-full py-1 px-2" />
 					</div>
 
 					<div className="flex flex-col items-start">
