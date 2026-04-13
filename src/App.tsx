@@ -164,7 +164,7 @@ function App() {
 					{notifications.map((notification, idx) => (
 						<li key={idx} className="text-left leading-8 text-sm flex gap-4">
 							<span className="text-gray-200 font-semibold">{notification.title}</span>
-							<span className="opacity-70">{notification.content}</span>
+							<span className="opacity-70">{notification.message}</span>
 						</li>
 					))}
 				</ul>
