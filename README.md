@@ -49,6 +49,12 @@ Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão 18 ou s
 
 ## 📖 Como Usar
 
+<img height="500" style="object-fit: contain" alt="Demo" src="https://github.com/user-attachments/assets/de7ee074-585a-4dd6-8f1d-b0ae817e92d7" />
+
 1.  **Conexão**: No topo da tela, insira a URL do seu servidor NTFY (ex: `https://ntfy.meu-dominio.com`) e o nome do tópico que deseja monitorar/enviar.
 2.  **Envio**: Preencha o formulário de criação com o título, conteúdo e o link de uma imagem. Clique em enviar.
 3.  **Visualização**: Na parte de baixo, verifique o histórico de notificações.
+
+## 🚀 Demonstração
+
+Acesse `[https://ntfy-estudo.vercel.app](https://ntfy-estudo.vercel.app)`
