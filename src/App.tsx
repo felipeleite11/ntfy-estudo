@@ -23,8 +23,6 @@ function App() {
 	const [isCreatingNotification, setIsCreatingNotification] = useState(false)
 
 	async function notify(content: NtfyContent) {
-		console.log('notif', content)
-
 		if (!("Notification" in window)) {
 			console.error("Este navegador não suporta notificações desktop.")
 			return
@@ -56,7 +54,7 @@ function App() {
 				// },
 
 				// Para evitar notificações duplicadas
-				// tag: "test-notification",
+				// tag: "test-notification"
 			}
 			
 			registration.showNotification(content.title, options)
@@ -139,7 +137,7 @@ function App() {
 
 					<div className="flex flex-col items-start">
 						<label htmlFor="content-input" className='text-xs'>Content</label>
-						<input type="text" defaultValue="Detalhes da notificação" id="content-input" name="content" className="border border-gray-500 rounded-md w-full py-1 px-2" />
+						<input type="text" defaultValue="Detalhes da **notificação**" id="content-input" name="content" className="border border-gray-500 rounded-md w-full py-1 px-2" />
 					</div>
 
 					<div className="flex flex-col items-start">
