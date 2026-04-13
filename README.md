@@ -31,20 +31,18 @@ Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão 18 ou s
 
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/felipeleite11/ntfy-estudo.git](https://github.com/felipeleite11/ntfy-estudo.git)
+    git clone https://github.com/felipeleite11/ntfy-estudo.git
     cd ntfy-estudo
     ```
 
 2.  Instale as dependências:
     ```bash
-    npm install
-    # ou
     yarn install
     ```
 
 3.  Inicie o servidor de desenvolvimento:
     ```bash
-    npm run dev
+    yarn dev
     ```
 
 4.  Acesse `http://localhost:5173` no seu navegador.
@@ -53,4 +51,4 @@ Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão 18 ou s
 
 1.  **Conexão**: No topo da tela, insira a URL do seu servidor NTFY (ex: `https://ntfy.meu-dominio.com`) e o nome do tópico que deseja monitorar/enviar.
 2.  **Envio**: Preencha o formulário de criação com o título, conteúdo e o link de uma imagem. Clique em enviar.
-3.  **Visualização**: Verifique o card de histórico na parte inferior para confirmar o recebimento e os detalhes da notificação.
+3.  **Visualização**: Na parte de baixo, verifique o histórico de notificações.
