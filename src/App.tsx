@@ -7,7 +7,7 @@ const defaultTopic = import.meta.env.VITE_NTFY_TOPIC
 
 interface NtfyContent {
 	title: string
-	content: string
+	message: string
 	image: string
 }
 
@@ -23,6 +23,8 @@ function App() {
 	const [isCreatingNotification, setIsCreatingNotification] = useState(false)
 
 	async function notify(content: NtfyContent) {
+		console.log('notif', content)
+
 		if (!("Notification" in window)) {
 			console.error("Este navegador não suporta notificações desktop.")
 			return
@@ -39,16 +41,24 @@ function App() {
 			const registration = await navigator.serviceWorker.ready
 
 			const options: NotificationOptions = {
-				body: content.content,
+				body: content.message,
 				icon: "favicon.svg",
 				badge: "favicon.svg",
-				// tag: "test-notification",
+
 				// @ts-ignore
 				vibrate: [200, 100, 200],
 				// @ts-ignore
-				image: content.image
-			}
+				image: content.image,
+				
+				// Usado para abrir URLs personalizadas ao clicar na notificação (este valor é lido no Service Worker)
+				// data: {
+				// 	url: 'https://calendar.google.com'
+				// },
 
+				// Para evitar notificações duplicadas
+				// tag: "test-notification",
+			}
+			
 			registration.showNotification(content.title, options)
 		}
 	}
@@ -88,7 +98,7 @@ function App() {
 		const formData = new FormData(event.currentTarget)
 		
 		const data = Object.fromEntries(formData.entries())
-		
+
 		try {
 			await axios.post(ntfyUrl, data)
 
