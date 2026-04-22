@@ -17,7 +17,7 @@ Uma interface web moderna desenvolvida com **React**, **Vite** e **TypeScript** 
 -   [React](https://reactjs.org/) - Biblioteca para interfaces de usuário.
 -   [Vite](https://vitejs.dev/) - Build tool ultra-rápida.
 -   [TypeScript](https://www.typescriptlang.org/) - Superset Javascript com tipagem estática.
--   [Axios](https://axios-http.com/) - Cliente HTTP baseado em promessas para o navegador e node.js.
+-   [Axios](https://axios-http.com/) - Cliente HTTP baseado em promises para o navegador e NodeJS.
 -   [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utilitário para estilização rápida e moderna.
 -   [NTFY API](https://docs.ntfy.sh/) - Sistema de notificação HTTP baseado em tópicos.
 
@@ -25,7 +25,7 @@ Uma interface web moderna desenvolvida com **React**, **Vite** e **TypeScript** 
 
 ### Pré-requisitos
 
-Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão 18 ou superior recomendada).
+[Node.js](https://nodejs.org/) 18.x ou superior.
 
 ### Instalação
 
@@ -51,9 +51,9 @@ Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão 18 ou s
 
 <img height="500" style="object-fit: contain" alt="Demo" src="https://github.com/user-attachments/assets/de7ee074-585a-4dd6-8f1d-b0ae817e92d7" />
 
-1.  **Conexão**: No topo da tela, insira a URL do seu servidor NTFY (ex: `https://ntfy.meu-dominio.com`) e o nome do tópico que deseja monitorar/enviar.
-2.  **Envio**: Preencha o formulário de criação com o título, conteúdo e o link de uma imagem. Clique em enviar.
-3.  **Visualização**: Na parte de baixo, verifique o histórico de notificações.
+1.  **Conexão**: No topo da tela, insira no campo "Server URL" a URL do seu servidor NTFY (ex: `https://ntfy.meu-dominio.com`) e no campo "Topic", o nome do tópico que deseja enviar.
+2.  **Envio**: Preencha o formulário "Create notification" com o título, conteúdo e a imagem que compõem a notificação. Clique em "Create notification".
+3.  **Visualização**: O sistema operacional do dispositivo exibirá uma notificação nativa (testando no Windows e Android). Na parte inferior da tela, verifique o histórico de notificações.
 
 ## 🚀 Demonstração
 
